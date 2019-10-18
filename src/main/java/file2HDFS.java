@@ -13,12 +13,15 @@ import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.util.Tool;
 
 public class file2HDFS {
+    static int flag = 0;
     public void write2HDFS(String src, String dst) throws IOException {
         Configuration conf = new Configuration();
         FSDataOutputStream out = null;
-
-        FileSystem fileSystem = FileSystem.get(conf);
-
+        FileSystem fileSystem = null;
+        if (flag == 0)
+            fileSystem = FileSystem.get(conf);
+        else
+            fileSystem = FileSystem.getLocal(conf);
         // Check if the file already exists
         Path path = new Path(src);
         InputStream in = null;
@@ -38,7 +41,7 @@ public class file2HDFS {
         }
         try {
             in = new BufferedInputStream(new FileInputStream(
-                new File(src)));
+                    new File(src)));
         }
         catch (FileNotFoundException e) {
             System.out.printf("Source file not exist!!\n");
@@ -56,7 +59,12 @@ public class file2HDFS {
     public void readfromHDFS(String dst) throws IOException {
         Configuration conf = new Configuration();
 
-        FileSystem fs = FileSystem.get(conf);
+        FileSystem fs = null;
+        if (flag == 0)
+            fs = FileSystem.get(conf);
+        else
+            fs = FileSystem.getLocal(conf);
+
         FSDataInputStream in = null;
 
         try {
@@ -78,7 +86,13 @@ public class file2HDFS {
 
     public void randomAccess(String dst) throws IOException {
         Configuration conf = new Configuration();
-        FileSystem fs = FileSystem.get(conf);
+
+        FileSystem fs = null;
+        if (flag == 0)
+            fs = FileSystem.get(conf);
+        else
+            fs = FileSystem.getLocal(conf);
+
         FSDataInputStream in = null;
         fs.open(new Path(dst));
 
