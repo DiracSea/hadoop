@@ -2,7 +2,7 @@
  * @Author: Longze Su
  * @Date: 2019-10-18 09:49:25
  * @Description: CS211_Project1
- * @LastEditTime: 2019-10-18 09:49:53
+ * @LastEditTime: 2019-10-18 09:59:29
  * @LastEditors: Longze Su
  */
 // Longze.Su
@@ -23,6 +23,7 @@ public class run {
         String dst2 = "/data/water1.csv";
         String dst3 = "/data/water2.csv";
         String dst1 = "hdfs://localhost:9000/input/water1.csv";
+        String output = "/data/cs226/output.txt"; 
         file2HDFS f = new file2HDFS();
         long t1, t2, t3, t4, t5, t6;
         try {
@@ -55,6 +56,7 @@ public class run {
             f.randomAccess(dst3);
             long end5=System.currentTimeMillis();
             t6 = end - start;
+
             System.out.println("HDFS");
             System.out.println("Total copy time "+(t1)+"ms");
             System.out.println("Total read time "+(t2)+"ms");
@@ -63,6 +65,19 @@ public class run {
             System.out.println("Total copy time "+(t4)+"ms");
             System.out.println("Total read time "+(t5)+"ms");
             System.out.println("Total random time "+(t6)+"ms");
+			File writename = new File(output); 
+			writename.createNewFile(); 
+			BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+            out.write("HDFS\r\n"); 
+            out.write("Total copy time "+(t1)+"ms\r\n"); 
+            out.write("Total read time "+(t2)+"ms\r\n"); 
+            out.write("Total random access time "+(t3)+"ms\r\n"); 
+            out.write("Local\r\n"); 
+            out.write("Total copy time "+(t4)+"ms\r\n"); 
+            out.write("Total read time "+(t5)+"ms\r\n"); 
+            out.write("Total random time "+(t6)+"ms\r\n"); 
+            out.flush(); 
+            out.close();
 
         }
         catch (IOException e) {
