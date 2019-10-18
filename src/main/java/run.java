@@ -1,3 +1,10 @@
+/*
+ * @Author: Longze Su
+ * @Date: 2019-10-18 09:49:25
+ * @Description: CS211_Project1
+ * @LastEditTime: 2019-10-18 09:49:53
+ * @LastEditors: Longze Su
+ */
 // Longze.Su
 
 import java.io.*;
@@ -13,7 +20,9 @@ public class run {
     public static void main(String[] args) {
         String dst = "hdfs://localhost:9000/input/water.csv";
         String src = "/data/water.csv";
-        String dst1 = "/data/water1.csv";
+        String dst2 = "/data/water1.csv";
+        String dst3 = "/data/water2.csv";
+        String dst1 = "hdfs://localhost:9000/input/water1.csv";
         file2HDFS f = new file2HDFS();
         long t1, t2, t3, t4, t5, t6;
         try {
@@ -21,25 +30,29 @@ public class run {
             f.write2HDFS(src, dst);
             long end=System.currentTimeMillis();
             t1 = end - start;
+
             long start1=System.currentTimeMillis();
             f.readfromHDFS(dst);
             long end1=System.currentTimeMillis();
             t2 = end - start;
+
+            f.write2HDFS(src, dst1);
             long start2=System.currentTimeMillis();
-            f.randomAccess(dst);
+            f.randomAccess(dst1);
             long end2=System.currentTimeMillis();
             t3 = end - start;
+
             f.flag = 1;
             long start3=System.currentTimeMillis();
-            f.write2HDFS(src, dst1);
+            f.write2HDFS(src, dst2);
             long end3=System.currentTimeMillis();
             t4 = end - start;
             long start4=System.currentTimeMillis();
-            f.readfromHDFS(dst1);
+            f.readfromHDFS(dst2);
             long end4=System.currentTimeMillis();
             t5 = end - start;
             long start5=System.currentTimeMillis();
-            f.randomAccess(dst1);
+            f.randomAccess(dst3);
             long end5=System.currentTimeMillis();
             t6 = end - start;
             System.out.println("HDFS");
