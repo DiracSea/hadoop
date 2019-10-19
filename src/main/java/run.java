@@ -2,7 +2,7 @@
  * @Author: Longze Su
  * @Date: 2019-10-18 09:49:25
  * @Description: CS211_Project1
- * @LastEditTime: 2019-10-18 22:38:21
+ * @LastEditTime: 2019-10-18 22:44:00
  * @LastEditors: Longze Su
  */
 // Longze.Su
@@ -42,6 +42,7 @@ public class run {
             long end2=System.currentTimeMillis();
             t3 = end2 - start2;
 
+            f.flag = 1;
             long start3=System.currentTimeMillis();
             f.write2HDFS(src, dst1);
             long end3=System.currentTimeMillis();

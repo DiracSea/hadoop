@@ -2,7 +2,7 @@
  * @Author: Longze Su
  * @Date: 2019-10-18 11:51:30
  * @Description: CS211_Project1
- * @LastEditTime: 2019-10-18 22:33:51
+ * @LastEditTime: 2019-10-18 22:43:15
  * @LastEditors: Longze Su
  */
 // Longze Su
@@ -20,34 +20,36 @@ import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.util.Tool;
 
 public class file2HDFS {
-
+    static int flag = 0;
     public void write2HDFS(String src, String dst) throws IOException {
         Configuration conf = new Configuration();
         FSDataOutputStream out = null;
-        Path path = new Path(dst);
-        Path path1 = new Path(src);
+        FileSystem fileSystem = null;
+        InputStream in = null;
 
-        FileSystem fs = path.getFileSystem(conf);
-
-        FSDataInputStream in = null;
+        if (flag == 0)
+            fileSystem = FileSystem.get(conf);
+        else
+            fileSystem = FileSystem.getLocal(conf).getRawFileSystem();
         // Check if the file already exists
-
-        if (fs.exists(path)) {
+        Path path = new Path(dst);
+        if (fileSystem.exists(path)) {
             System.out.println("File already exists");
             return;
         }
         // Hadoop
         // Create a new file and write data to it.
         try {
-            out = fs.create(path);
+            out = fileSystem.create(path);
         }
-        catch (FileNotFoundException e) {
+        catch (Exception e) {
             System.out.printf("Dest file not exist!!\n");
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
         try {
-            in = fs.open(path1);
+            in = new BufferedInputStream(new FileInputStream(
+                    new File(src)));
         }
         catch (FileNotFoundException e) {
             System.out.printf("Source file not exist!!\n");
@@ -59,13 +61,13 @@ public class file2HDFS {
 
         in.close();
         out.close();
-        fs.close();
+        fileSystem.close();
     }
 
     public void readfromHDFS(String dst) throws IOException {
         Configuration conf = new Configuration();
 
-        Path path = new Path(dst);
+        Path path = new Path(filePath);
         FileSystem fs = path.getFileSystem(conf);
 
         FSDataInputStream in = null;
@@ -73,7 +75,7 @@ public class file2HDFS {
 
         try {
             // open the path4
-            in = fs.open(path);
+            in = fs.open(new Path(dst));
             byte buffer[] = new byte[1024];
 
             while (in.read(buffer) > 0) {
@@ -95,7 +97,7 @@ public class file2HDFS {
     public void randomAccess(String dst) throws IOException {
         Configuration conf = new Configuration();
         
-        Path path = new Path(dst);
+        Path path = new Path(filePath);
         FileSystem fs = path.getFileSystem(conf);
 
         FSDataInputStream in = null;
