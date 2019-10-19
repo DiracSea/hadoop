@@ -2,7 +2,7 @@
  * @Author: Longze Su
  * @Date: 2019-10-18 09:49:25
  * @Description: CS211_Project1
- * @LastEditTime: 2019-10-18 21:33:11
+ * @LastEditTime: 2019-10-18 21:50:34
  * @LastEditors: Longze Su
  */
 // Longze.Su
@@ -20,7 +20,7 @@ public class run {
     public static void main(String[] args) {
         String dst = "hdfs://localhost:9000/input/water.csv";
         String src = "/data/water.csv";
-        String dst2 = "/data/water1.csv";
+        String dst1 = "/data/water1.csv";
         // String dst3 = "/data/water2.csv";
         /// String dst1 = "hdfs://localhost:9000/input/water1.csv";
         String output = "/data/cs226/output.txt"; 
@@ -35,29 +35,29 @@ public class run {
             long start1=System.currentTimeMillis();
             f.readfromHDFS(dst);
             long end1=System.currentTimeMillis();
-            t2 = end - start;
+            t2 = end1 - start1;
 
 
             long start2=System.currentTimeMillis();
             f.randomAccess(dst);
             long end2=System.currentTimeMillis();
-            t3 = end - start;
+            t3 = end2 - start2;
 
             f.flag = 1;
             long start3=System.currentTimeMillis();
-            f.write2HDFS(src, dst2);
+            f.write2HDFS(src, dst1);
             long end3=System.currentTimeMillis();
-            t4 = end - start;
+            t4 = end3 - start3;
             
             long start4=System.currentTimeMillis();
-            f.readfromHDFS(dst2);
+            f.readfromHDFS(dst1);
             long end4=System.currentTimeMillis();
-            t5 = end - start;
+            t5 = end4 - start4;
 
             long start5=System.currentTimeMillis();
-            f.randomAccess(dst2);
+            f.randomAccess(dst1);
             long end5=System.currentTimeMillis();
-            t6 = end - start;
+            t6 = end5 - start5;
 
             System.out.println("HDFS");
             System.out.println("Total copy time "+(t1)+"ms");
