@@ -2,7 +2,7 @@
  * @Author: Longze Su
  * @Date: 2019-10-18 09:49:25
  * @Description: CS211_Project1
- * @LastEditTime: 2019-10-18 22:32:28
+ * @LastEditTime: 2019-10-18 22:38:21
  * @LastEditors: Longze Su
  */
 // Longze.Su
@@ -19,7 +19,7 @@ import org.apache.hadoop.util.Tool;
 public class run {
     public static void main(String[] args) {
         String dst = "hdfs://localhost:9000/input/water.csv";
-        String src = "file://data/water.csv";
+        String src = "/data/water.csv";
         String dst1 = "file://data/water1.csv";
         // String dst3 = "/data/water2.csv";
         /// String dst1 = "hdfs://localhost:9000/input/water1.csv";
@@ -48,12 +48,12 @@ public class run {
             t4 = end3 - start3;
             
             long start4=System.currentTimeMillis();
-            f.readfromHDFS(dst1);
+            f.readfromHDFS(src);
             long end4=System.currentTimeMillis();
             t5 = end4 - start4;
 
             long start5=System.currentTimeMillis();
-            f.randomAccess(dst1);
+            f.randomAccess(src);
             long end5=System.currentTimeMillis();
             t6 = end5 - start5;
 
