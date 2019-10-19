@@ -2,7 +2,7 @@
  * @Author: Longze Su
  * @Date: 2019-10-18 11:51:30
  * @Description: CS211_Project1
- * @LastEditTime: 2019-10-18 22:43:15
+ * @LastEditTime: 2019-10-18 22:47:19
  * @LastEditors: Longze Su
  */
 // Longze Su
@@ -67,7 +67,7 @@ public class file2HDFS {
     public void readfromHDFS(String dst) throws IOException {
         Configuration conf = new Configuration();
 
-        Path path = new Path(filePath);
+        Path path = new Path(dst);
         FileSystem fs = path.getFileSystem(conf);
 
         FSDataInputStream in = null;
@@ -97,7 +97,7 @@ public class file2HDFS {
     public void randomAccess(String dst) throws IOException {
         Configuration conf = new Configuration();
         
-        Path path = new Path(filePath);
+        Path path = new Path(dst);
         FileSystem fs = path.getFileSystem(conf);
 
         FSDataInputStream in = null;
