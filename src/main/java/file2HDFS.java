@@ -2,7 +2,7 @@
  * @Author: Longze Su
  * @Date: 2019-10-18 11:51:30
  * @Description: CS211_Project1
- * @LastEditTime: 2019-10-18 22:31:36
+ * @LastEditTime: 2019-10-18 22:33:51
  * @LastEditors: Longze Su
  */
 // Longze Su
@@ -20,7 +20,7 @@ import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.util.Tool;
 
 public class file2HDFS {
-    static int flag = 0;
+
     public void write2HDFS(String src, String dst) throws IOException {
         Configuration conf = new Configuration();
         FSDataOutputStream out = null;
@@ -59,7 +59,7 @@ public class file2HDFS {
 
         in.close();
         out.close();
-        fileSystem.close();
+        fs.close();
     }
 
     public void readfromHDFS(String dst) throws IOException {
