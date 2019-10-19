@@ -2,7 +2,7 @@
  * @Author: Longze Su
  * @Date: 2019-10-18 11:51:30
  * @Description: CS211_Project1
- * @LastEditTime: 2019-10-18 22:52:34
+ * @LastEditTime: 2019-10-18 22:58:47
  * @LastEditors: Longze Su
  */
 // Longze Su
@@ -33,10 +33,10 @@ public class file2HDFS {
             fileSystem = FileSystem.getLocal(conf).getRawFileSystem();
         // Check if the file already exists
         Path path = new Path(dst);
-        // if (fileSystem.exists(path)) {
-        //     System.out.println("File already exists");
-        //     return;
-        // }
+        if (fileSystem.exists(path)) {
+            System.out.println("File already exists");
+            return;
+        }
         // Hadoop
         // Create a new file and write data to it.
         try {

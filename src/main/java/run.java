@@ -20,7 +20,7 @@ public class run {
     public static void main(String[] args) {
         String dst = "hdfs://localhost:9000/input/water.csv";
         String src = "/data/water.csv";
-        String dst1 = "file://data/water1.csv";
+        String dst1 = "file:///data/water1.csv";
         // String dst3 = "/data/water2.csv";
         /// String dst1 = "hdfs://localhost:9000/input/water1.csv";
         String output = "/data/cs226/output.txt"; 
