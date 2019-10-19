@@ -2,7 +2,7 @@
  * @Author: Longze Su
  * @Date: 2019-10-18 09:49:25
  * @Description: CS211_Project1
- * @LastEditTime: 2019-10-18 09:59:29
+ * @LastEditTime: 2019-10-18 21:33:11
  * @LastEditors: Longze Su
  */
 // Longze.Su
@@ -37,7 +37,7 @@ public class run {
             long end1=System.currentTimeMillis();
             t2 = end - start;
 
-            f.write2HDFS(src, dst);
+
             long start2=System.currentTimeMillis();
             f.randomAccess(dst);
             long end2=System.currentTimeMillis();
@@ -48,10 +48,12 @@ public class run {
             f.write2HDFS(src, dst2);
             long end3=System.currentTimeMillis();
             t4 = end - start;
+            
             long start4=System.currentTimeMillis();
             f.readfromHDFS(dst2);
             long end4=System.currentTimeMillis();
             t5 = end - start;
+
             long start5=System.currentTimeMillis();
             f.randomAccess(dst2);
             long end5=System.currentTimeMillis();

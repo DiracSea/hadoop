@@ -2,7 +2,7 @@
  * @Author: Longze Su
  * @Date: 2019-10-18 11:51:30
  * @Description: CS211_Project1
- * @LastEditTime: 2019-10-18 13:00:02
+ * @LastEditTime: 2019-10-18 21:38:41
  * @LastEditors: Longze Su
  */
 // Longze Su
@@ -107,7 +107,7 @@ public class file2HDFS {
         }
 
         FSDataInputStream in = null;
-        Random rand = null; long pos = 0  ;
+        Random rand = new Random(); long pos = 0;
 
         try {
             in = fs.open(new Path(dst));
@@ -116,8 +116,6 @@ public class file2HDFS {
             for (int i = 0; i < 2000; i++) {
 
                 pos = rand.nextInt(2070000000) + 1;
-                in.seek(pos);
-
                 in.readFully(pos, buffer, 0, 1024);
             }
 
