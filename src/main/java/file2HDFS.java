@@ -1,3 +1,10 @@
+/*
+ * @Author: Longze Su
+ * @Date: 2019-10-18 11:51:30
+ * @Description: CS211_Project1
+ * @LastEditTime: 2019-10-18 13:00:02
+ * @LastEditors: Longze Su
+ */
 // Longze Su
 import java.io.*;
 import java.util.Random;
@@ -66,11 +73,16 @@ public class file2HDFS {
             fs = FileSystem.getLocal(conf);
 
         FSDataInputStream in = null;
+        // FSDataOutputStream out = null;
 
         try {
-            // open the path
+            // open the path4
             in = fs.open(new Path(dst));
-            IOUtils.copyBytes(in, System.out, 4096, false);
+            byte buffer[] = new byte[1024];
+
+            while (in.read(buffer) > 0) {
+                ;
+            }
             System.out.println("END");
         }
         catch (IOException e){
@@ -80,40 +92,49 @@ public class file2HDFS {
         }
         finally {
             IOUtils.closeStream(in);
+            IOUtils.closeStream(fs);
         }
-        fs.close();
     }
 
     public void randomAccess(String dst) throws IOException {
         Configuration conf = new Configuration();
 
         FileSystem fs = null;
-        if (flag == 0)
+        if (flag == 0) {
             fs = FileSystem.get(conf);
-        else
+        } else {
             fs = FileSystem.getLocal(conf);
+        }
 
         FSDataInputStream in = null;
-        fs.open(new Path(dst));
+        Random rand = null; long pos = 0  ;
 
         try {
             in = fs.open(new Path(dst));
+            byte buffer[] = new byte[1024];
+
+            for (int i = 0; i < 2000; i++) {
+
+                pos = rand.nextInt(2070000000) + 1;
+                in.seek(pos);
+
+                in.readFully(pos, buffer, 0, 1024);
+            }
+
+
+            while (in.read(buffer) > 0) {
+                ;
+            }
+            System.out.println("END");
         }
-        catch (Exception e) {
-            System.out.printf("File not exist!!\n");
+        catch (IOException e){
+            System.out.printf("IOException!!\n");
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-        for (int i = 0; i < 2000; i++) {
-            Random rand = null;
-            int pos = rand.nextInt(2070000000) + 1;
-            in.seek(pos);
-            IOUtils.copyBytes(in, System.out, 1024, false);
-
-            System.out.println("END " + i);
+        finally {
+            IOUtils.closeStream(in);
+            IOUtils.closeStream(fs);
         }
-
-        in.close();
-        fs.close();
     }
 }
