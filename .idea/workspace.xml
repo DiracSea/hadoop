@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8fee8efa-a56a-4bc7-b149-10ab5ff2d82a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/run.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/run.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/run.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/run.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +30,10 @@
   <component name="ProjectId" id="1SMFSmMrZ0shCPVOQt622AXG5LQ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
+    <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
+    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
+    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="hdfsupload" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
